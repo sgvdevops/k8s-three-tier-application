@@ -22,7 +22,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies with the production flag to avoid unnecessary dev dependencies
-RUN npm ci
+RUN npm install
 
 # Copy the application code into the container
 COPY . .

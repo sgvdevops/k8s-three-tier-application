@@ -11,7 +11,9 @@
 FROM node:14
 
 # Set a non-root user and group for security
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+RUN addgroup --system appgroup && \
+    adduser --system appuser --ingroup appgroup
+#RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 # Set working directory
 WORKDIR /app

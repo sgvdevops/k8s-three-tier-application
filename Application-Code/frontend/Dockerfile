@@ -1,19 +1,9 @@
-# FROM node:14
-# WORKDIR /usr/src/app
-# COPY package*.json ./
-# RUN npm install
-# COPY . .
-# CMD [ "npm", "start" ]
-
-
-
 # Use the official Node.js image from the Docker Hub as a base
 FROM node:14
 
 # Set a non-root user and group for security
 RUN addgroup --system appgroup && \
     adduser --system appuser --ingroup appgroup
-#RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 
 # Set working directory
 WORKDIR /app
@@ -22,7 +12,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies with the production flag to avoid unnecessary dev dependencies
-RUN npm install
+RUN npm ci
 
 # Copy the application code into the container
 COPY . .
@@ -37,4 +27,4 @@ USER appuser
 EXPOSE 3000
 
 # Start the application
-CMD ["node", "start"]
+CMD ["npm", "start"]

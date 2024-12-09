@@ -1,17 +1,9 @@
-# FROM node:14
-# WORKDIR /usr/src/app
-# COPY package*.json ./
-# RUN npm install
-# COPY . .
-# CMD ["node", "index.js"]
-
-
-
 # Use the official Node.js image from the Docker Hub as a base
 FROM node:14
 
 # Set a non-root user and group for security
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+RUN addgroup --system appgroup && \
+    adduser --system appuser --ingroup appgroup
 
 # Set working directory
 WORKDIR /app
@@ -32,7 +24,7 @@ RUN chown -R appuser:appgroup /app
 USER appuser
 
 # Expose the port the app will run on (make sure to match the port in your app)
-EXPOSE 3000
+EXPOSE 3500
 
 # Start the application
 CMD ["node", "index.js"]
